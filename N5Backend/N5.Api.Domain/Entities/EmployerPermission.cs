@@ -5,7 +5,7 @@ public class EmployerPermission
     public int Id { get; set; }
     public required string Name { get; set; }
     public required string Surname { get; set; }
-    public DateTime CreatedAt => DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public int PermissionId { get; set; }
     public required PermissionType PermissionTypeRel { get; set; }
 }
