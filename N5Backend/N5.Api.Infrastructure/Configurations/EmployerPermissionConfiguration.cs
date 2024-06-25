@@ -4,9 +4,9 @@ using N5.Api.Domain.Entities;
 
 namespace N5.Api.Infrastructure.Configurations;
 
-public sealed class EmployerPermissionConfiguration : IEntityTypeConfiguration<EmployerPermission>
+public sealed class EmployerPermissionConfiguration : IEntityTypeConfiguration<Permission>
 {
-    public void Configure(EntityTypeBuilder<EmployerPermission> builder)
+    public void Configure(EntityTypeBuilder<Permission> builder)
     {
         builder.HasKey((employer) => employer.Id);
 
@@ -25,7 +25,7 @@ public sealed class EmployerPermissionConfiguration : IEntityTypeConfiguration<E
                     .HasColumnType("datetime2");
 
 
-        builder.HasOne((employer) => employer.PermissionTypeRel)
+        builder.HasOne((employer) => employer.PermissionType)
                .WithMany((permissions) => permissions.Employers)
                .HasForeignKey((employer) => employer.PermissionId);
     }

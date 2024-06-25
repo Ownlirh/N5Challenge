@@ -4,5 +4,5 @@ public class PermissionType
 {
     public int Id { get; set; }
     public required string Description { get; set; }
-    public ICollection<EmployerPermission> Employers { get; } = new List<EmployerPermission>();
+    public ICollection<Permission> Employers { get; } = new List<Permission>();
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using N5.Api.Application.Contracts;
 using N5.Api.Infrastructure.Context;
+using N5.Api.Infrastructure.Repositories;
 
 namespace N5.Api.Infrastructure;
 
@@ -17,6 +19,11 @@ public static class InfrastructureRegistration
         }
 
         services.AddDbContext<N5Context>((options) => options.UseSqlServer(n5ConnectionString));
+
+        services.AddTransient<IPermissionTypeRepository, PermissionTypeRepository>();
+        services.AddTransient<IPermissionsRepository, PermissionRepository>();
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using N5.Api.Application.Services;
 using N5.Api.Application.Validators;
 using System.Reflection;
 
@@ -15,6 +16,7 @@ public static class ApplicationRegistration
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         // Services
+        services.AddTransient<IPermissionService, PermissionService>();
 
         return services;
 

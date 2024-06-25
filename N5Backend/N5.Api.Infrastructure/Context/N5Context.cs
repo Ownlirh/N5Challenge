@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using N5.Api.Domain.Entities;
+using N5.Api.Infrastructure.Extensions;
 
 namespace N5.Api.Infrastructure.Context;
 
@@ -12,11 +13,14 @@ public class N5Context : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(N5Context).Assembly);
+
+        modelBuilder.SeedData();
+
+        base.OnModelCreating(modelBuilder);
     }
 
     public virtual DbSet<PermissionType> PermissionTypes { get; set; }
-    public virtual DbSet<EmployerPermission> EmployerPermissions { get; set; }
+    public virtual DbSet<Permission> Permissions { get; set; }
 }

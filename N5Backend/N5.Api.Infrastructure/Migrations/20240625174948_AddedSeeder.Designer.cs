@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using N5.Api.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using N5.Api.Infrastructure.Context;
 namespace N5.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(N5Context))]
-    partial class N5ContextModelSnapshot : ModelSnapshot
+    [Migration("20240625174948_AddedSeeder")]
+    partial class AddedSeeder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace N5.Api.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("N5.Api.Domain.Entities.Permission", b =>
+            modelBuilder.Entity("N5.Api.Domain.Entities.EmployerPermission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,13 +53,13 @@ namespace N5.Api.Infrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("EmployerPermissions");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 6, 25, 17, 52, 46, 273, DateTimeKind.Utc).AddTicks(9914),
+                            CreatedAt = new DateTime(2024, 6, 25, 17, 49, 48, 20, DateTimeKind.Utc).AddTicks(4794),
                             Name = "Jhon",
                             PermissionId = 1,
                             Surname = "Doe"
@@ -64,7 +67,7 @@ namespace N5.Api.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 6, 25, 17, 52, 46, 273, DateTimeKind.Utc).AddTicks(9916),
+                            CreatedAt = new DateTime(2024, 6, 25, 17, 49, 48, 20, DateTimeKind.Utc).AddTicks(4802),
                             Name = "Jane",
                             PermissionId = 2,
                             Surname = "Doe"
@@ -72,7 +75,7 @@ namespace N5.Api.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 6, 25, 17, 52, 46, 273, DateTimeKind.Utc).AddTicks(9917),
+                            CreatedAt = new DateTime(2024, 6, 25, 17, 49, 48, 20, DateTimeKind.Utc).AddTicks(4804),
                             Name = "Seven",
                             PermissionId = 3,
                             Surname = "Doe"
@@ -80,7 +83,7 @@ namespace N5.Api.Infrastructure.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 6, 25, 17, 52, 46, 273, DateTimeKind.Utc).AddTicks(9919),
+                            CreatedAt = new DateTime(2024, 6, 25, 17, 49, 48, 20, DateTimeKind.Utc).AddTicks(4805),
                             Name = "Clop",
                             PermissionId = 4,
                             Surname = "Doe"
@@ -127,7 +130,7 @@ namespace N5.Api.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("N5.Api.Domain.Entities.Permission", b =>
+            modelBuilder.Entity("N5.Api.Domain.Entities.EmployerPermission", b =>
                 {
                     b.HasOne("N5.Api.Domain.Entities.PermissionType", "PermissionTypeRel")
                         .WithMany("Employers")

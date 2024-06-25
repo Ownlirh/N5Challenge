@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using N5.Api.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using N5.Api.Infrastructure.Context;
 namespace N5.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(N5Context))]
-    partial class N5ContextModelSnapshot : ModelSnapshot
+    [Migration("20240625175246_Fix-Table-Names")]
+    partial class FixTableNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
