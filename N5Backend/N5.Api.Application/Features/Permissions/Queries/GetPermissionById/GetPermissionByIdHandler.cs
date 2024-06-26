@@ -2,7 +2,7 @@
 using N5.Api.Application.DTOs;
 using N5.Api.Application.Services;
 
-namespace N5.Api.Application.Features.Permissions.Queries;
+namespace N5.Api.Application.Features.Permissions.Queries.Queries;
 
 public class GetPermissionByIdHandler(
     IPermissionService permissionService) : IRequestHandler<GetPermissionByIdQuery, PermissionDTO>

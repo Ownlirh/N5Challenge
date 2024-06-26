@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace N5.Api.Application.Features.Permissions.Queries;
+namespace N5.Api.Application.Features.Permissions.Queries.Queries;
 
 public class GetPermissionByIdQueryValidator : AbstractValidator<GetPermissionByIdQuery>
 {

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using N5.Api.Application.DTOs;
 
-namespace N5.Api.Application.Features.Permissions.Queries;
+namespace N5.Api.Application.Features.Permissions.Queries.Queries;
 
 public class GetPermissionByIdQuery : IRequest<PermissionDTO>
 {

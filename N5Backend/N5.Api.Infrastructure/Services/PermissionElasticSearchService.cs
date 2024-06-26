@@ -28,4 +28,26 @@ public class PermissionElasticSearchService : ElasticSearchBaseService, IPermiss
 
         throw new BusinessException($"Failed to get document with id {id}");
     }
+
+    public async Task<PermissionListDTO> GetPermissions(int limit, CancellationToken cancellationToken)
+    {
+        var response = new PermissionListDTO();
+        var searchResponse = await _client.SearchAsync<PermissionDTO>(s => s
+                                .Size(limit));
+
+        if (searchResponse is not null && searchResponse.IsValidResponse)
+        {
+            response.Permissions = searchResponse.Documents;
+
+            response.Limit = limit;
+            response.Total = searchResponse.Total;
+        }
+        else
+        {
+            // Log ->  Error ->  {searchResponse!.DebugInformation} 
+            throw new Exception($"There was an error while trying to find documents, try again later.");
+        }
+
+        return response;
+    }
 }
