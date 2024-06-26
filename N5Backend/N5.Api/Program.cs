@@ -1,7 +1,11 @@
 using N5.Api.Application;
+using N5.Api.Domain.Models;
 using N5.Api.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var appSettings = builder.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
+builder.Services.AddSingleton(appSettings);
 
 builder.Services.AddApplicationServiceRegistration();
 builder.Services.AddInfrastructureServiceRegistration(builder.Configuration);

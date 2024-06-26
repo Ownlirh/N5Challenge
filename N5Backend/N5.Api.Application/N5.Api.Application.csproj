@@ -16,4 +16,8 @@
     <ProjectReference Include="..\N5.Api.Domain\N5.Api.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Permissions\Queries\" />
+  </ItemGroup>
+
 </Project>

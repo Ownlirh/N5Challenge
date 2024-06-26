@@ -5,4 +5,5 @@ namespace N5.Api.Application.Services;
 public interface IPermissionService
 {
     Task<List<PermissionDTO>> GetPermissions();
+    Task CreatePermission(RegisterPermissionDTO request, CancellationToken cancellationToken);
 }
