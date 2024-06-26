@@ -8,9 +8,10 @@ namespace N5.Api.Infrastructure.Repositories;
 
 public class PermissionRepository(N5Context dbContext) : GenericRepository<N5Context, Permission>(dbContext), IPermissionsRepository
 {
-    public Task<List<PermissionDTO>> GetAllPermissionDTO()
+    public Task<PermissionDTO?> GetPermissionById(int permissionId)
     {
         return dbContext.Permissions.Include((permission) => permission.PermissionType)
+                                    .Where((permission) => permission.Id == permissionId)
                                     .Select((permission) => new PermissionDTO()
                                     {
                                         Id = permission.Id,
@@ -19,6 +20,6 @@ public class PermissionRepository(N5Context dbContext) : GenericRepository<N5Con
                                         CreatedAt = permission.CreatedAt,
                                         PermissionType = permission.PermissionType.Description,
                                         PermissionId = permission.PermissionType.Id,
-                                    }).ToListAsync();
+                                    }).FirstOrDefaultAsync();
     }
 }

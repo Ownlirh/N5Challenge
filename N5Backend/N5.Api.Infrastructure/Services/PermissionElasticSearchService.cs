@@ -1,6 +1,6 @@
-﻿using N5.Api.Application.Exceptions;
+﻿using N5.Api.Application.DTOs;
+using N5.Api.Application.Exceptions;
 using N5.Api.Application.Services;
-using N5.Api.Domain.Entities;
 using N5.Api.Domain.Models;
 using N5.Api.Domain.Models.Structs;
 
@@ -11,15 +11,15 @@ public class PermissionElasticSearchService : ElasticSearchBaseService, IPermiss
     public PermissionElasticSearchService(AppSettings appSettings) : base(ElasticSearchIndexes.Permissions, appSettings)
     {
     }
-    public async Task<bool> AddOrUpdate(Permission document, CancellationToken cancellationToken = default)
+    public async Task<bool> AddOrUpdate(PermissionDTO document, CancellationToken cancellationToken = default)
     {
         var indexResponse = await _client.IndexAsync(document, cancellationToken);
         return indexResponse.IsValidResponse;
     }
 
-    public async Task<Permission> GetDocument(int id, CancellationToken cancellationToken = default)
+    public async Task<PermissionDTO> GetDocument(int id, CancellationToken cancellationToken = default)
     {
-        var response = await _client.GetAsync<Permission>(id, cancellationToken);
+        var response = await _client.GetAsync<PermissionDTO>(id, cancellationToken);
 
         if (response.IsValidResponse && response.Source != null)
         {

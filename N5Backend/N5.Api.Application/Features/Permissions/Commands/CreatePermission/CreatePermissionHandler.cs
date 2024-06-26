@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using N5.Api.Application.Services;
 
-namespace N5.Api.Application.Features.Permissions.Commands;
+namespace N5.Api.Application.Features.Permissions.Commands.CreatePermission;
 
 public class CreatePermissionHandler(
     IPermissionService permissionService) : IRequestHandler<CreatePermissionCommand>

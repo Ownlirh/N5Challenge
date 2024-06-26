@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using N5.Api.Application.DTOs;
 using N5.Api.Application.Exceptions;
-using N5.Api.Application.Features.Permissions.Commands;
+using N5.Api.Application.Features.Permissions.Commands.CreatePermission;
+using N5.Api.Application.Features.Permissions.Commands.ModifyPermission;
+using N5.Api.Application.Features.Permissions.Queries;
 using N5.Api.Application.Models;
 
 namespace N5.Api.Controllers;
@@ -12,12 +14,45 @@ public class PermissionController(
     IMediator mediatoR) : ControllerBase
 {
     [HttpGet]
-    [Route("")]
-    public async Task<ActionResult> GetPermissions()
+    [Route("{permissionId:int}")]
+    public async Task<ActionResult> GetPermissionsById(int permissionId)
     {
         try
         {
-            // TODO
+            var query = new GetPermissionByIdQuery() { PermissionId = permissionId };
+
+            return Ok(await mediatoR.Send(query));
+        }
+        catch (BusinessException ex)
+        {
+            return BadRequest(new BusinessErrorExceptionResponse()
+            {
+                Data = ex.ExceptionData,
+                Message = ex.Message
+            });
+        }
+        catch (Exception ex)
+        {
+            return Problem(ex.Message);
+        }
+    }
+
+    [HttpPut]
+    [Route("{permissionId:int}")]
+    public async Task<ActionResult> ModifyPermission(int permissionId, [FromBody] RegisterPermissionDTO request)
+    {
+        try
+        {
+            var query = new ModifyPermissionCommand()
+            {
+                Id = permissionId,
+                Name = request.Name,
+                Surname = request.Surname,
+                PermissionTypeId = request.PermissionTypeId
+            };
+
+            await mediatoR.Send(query);
+
             return Ok();
         }
         catch (BusinessException ex)
@@ -34,6 +69,7 @@ public class PermissionController(
         }
     }
 
+    // Not asked in the challenge but used for upload permissions to elastic search
     [HttpPost]
     [Route("")]
     public async Task<ActionResult> CreatePermission([FromBody] RegisterPermissionDTO request)
@@ -44,7 +80,7 @@ public class PermissionController(
             {
                 Name = request.Name,
                 Surname = request.Surname,
-                PermissionId = request.PermissionId
+                PermissionTypeId = request.PermissionTypeId
             };
 
             await mediatoR.Send(command).ConfigureAwait(false);
@@ -64,4 +100,6 @@ public class PermissionController(
             return Problem(ex.Message);
         }
     }
+
+
 }

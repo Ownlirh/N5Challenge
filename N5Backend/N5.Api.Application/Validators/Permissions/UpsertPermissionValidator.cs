@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
+using N5.Api.Application.DTOs;
+namespace N5.Api.Application.Validators.Permissions;
 
-namespace N5.Api.Application.Features.Permissions.Commands;
-
-public class CreatePermissionCommandValidator : AbstractValidator<CreatePermissionCommand>
+public class UpsertPermissionDTOValidator : AbstractValidator<RegisterPermissionDTO>
 {
-    public CreatePermissionCommandValidator()
+    public UpsertPermissionDTOValidator()
     {
         RuleFor((newPermission) => newPermission.Name)
                     .NotEmpty()
@@ -18,7 +18,7 @@ public class CreatePermissionCommandValidator : AbstractValidator<CreatePermissi
                     .MaximumLength(250)
                     .MinimumLength(1);
 
-        RuleFor((newPermission) => newPermission.PermissionId)
+        RuleFor((newPermission) => newPermission.PermissionTypeId)
                     .NotEmpty()
                     .NotNull()
                     .GreaterThan(0);

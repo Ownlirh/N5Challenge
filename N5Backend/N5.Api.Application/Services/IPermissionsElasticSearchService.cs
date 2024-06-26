@@ -1,8 +1,8 @@
-﻿using N5.Api.Domain.Entities;
+﻿using N5.Api.Application.DTOs;
 
 namespace N5.Api.Application.Services;
 
-public interface IPermissionsElasticSearchService : IGenericElasticSearchService<Permission>
+public interface IPermissionsElasticSearchService : IGenericElasticSearchService<PermissionDTO>
 {
-    Task<Permission> GetDocument(int id, CancellationToken cancellationToken);
+    Task<PermissionDTO> GetDocument(int id, CancellationToken cancellationToken);
 }
